@@ -1,22 +1,14 @@
-# Master Timetable Generator
+# Master Timetable
 
-Intelligent schedule generator for schools and colleges.
-
-## Features
-- Teachers, subjects, classes, rooms management
-- Smart multi-pass scheduler with load balancing
-- Class view and teacher view
-- CSV export and print
-- Sample data included
-- Works fully offline in the browser
+Simple school timetable generator.
 
 ## How to use
-1. Open index.html in any browser
-2. Click Load Sample Data (or add your own)
+1. Open index.html in a browser
+2. Click Load sample (or add your own teachers, subjects, classes)
 3. Click Generate Timetable
-4. Switch between By Class and By Teacher views
+4. View by class or by teacher, export CSV, or print
 
 ## Files
-- index.html - structure
-- styles.css - design
-- app.js - logic and generator
+- index.html
+- styles.css
+- app.js
