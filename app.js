@@ -288,14 +288,14 @@ document.getElementById('modalSave').onclick = () => {
   toast('Saved', 'ok');
 };
 
-document.getElementById('daysBox').onchange = () => {
+document.getElementById('daysBox').addEventListener('change', () => {
   store.days = [...document.querySelectorAll('#daysBox input:checked')].map(i => i.value);
   save();
-};
-document.getElementById('periods').onchange = () => {
+});
+document.getElementById('periods').addEventListener('change', () => {
   store.periods = parseInt(document.getElementById('periods').value) || 8;
   save();
-};
+});
 
 function shuffle(a) {
   const arr = [...a];
@@ -319,7 +319,7 @@ function generate() {
     c.reqs.forEach(r => {
       const sub = store.subjects.find(s => s.id === r.sid);
       if (!sub || !sub.teacherIds.length) {
-        throw new Error(`"${sub ? sub.name : 'Subject'}" has no teacher assigned`);
+        throw new Error('"' + (sub ? sub.name : 'Subject') + '" has no teacher assigned');
       }
       for (let i = 0; i < r.n; i++) {
         lessons.push({ classId: c.id, subjectId: sub.id, teachers: [...sub.teacherIds] });
@@ -501,7 +501,7 @@ document.getElementById('exportCsv').onclick = () => {
     const t = store.teachers.find(x => x.id === s.teacherId);
     rows.push([c ? c.name : '', s.day, s.period, sub ? sub.name : '', t ? t.name : '']);
   });
-  const csv = rows.map(r => r.map(x => `"${String(x).replace(/"/g, '""')}"`).join(',')).join('\n');
+  const csv = rows.map(r => r.map(x => '"' + String(x).replace(/"/g, '""') + '"').join(',')).join('\n');
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
   a.download = 'timetable.csv';
@@ -563,5 +563,13 @@ document.getElementById('clearAll').onclick = () => {
   toast('Cleared');
 };
 
-load();
-render();
+try {
+  load();
+  render();
+  if (document.getElementById('emptyTt')) {
+    document.getElementById('emptyTt').style.display = 'block';
+  }
+} catch (e) {
+  console.error(e);
+  alert('Failed to start: ' + e.message);
+}
