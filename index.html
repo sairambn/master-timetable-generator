@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MasterTimetable | Intelligent Schedule Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">MT</div>
+        <div class="brand-text">
+          <span class="brand-name">MasterTimetable</span>
+          <span class="brand-tag">Schedule Engine</span>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-item active" data-view="dashboard">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Dashboard
+        </button>
+        <button class="nav-item" data-view="teachers">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Teachers
+        </button>
+        <button class="nav-item" data-view="subjects">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Subjects
+        </button>
+        <button class="nav-item" data-view="classes">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          Classes
+        </button>
+        <button class="nav-item" data-view="rooms">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Rooms
+        </button>
+        <button class="nav-item" data-view="settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Settings
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="btn-generate" id="generateBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Generate Timetable
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-left">
+          <h1 id="pageTitle">Dashboard</h1>
+          <p id="pageSubtitle">Overview of your schedule data</p>
+        </div>
+        <div class="topbar-right">
+          <button class="btn-ghost" id="loadSample">Load Sample Data</button>
+          <button class="btn-ghost" id="clearAll">Clear All</button>
+        </div>
+      </header>
+
+      <!-- DASHBOARD -->
+      <section class="view active" id="view-dashboard">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon teachers">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="statTeachers">0</span>
+              <span class="stat-label">Teachers</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon subjects">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="statSubjects">0</span>
+              <span class="stat-label">Subjects</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon classes">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="statClasses">0</span>
+              <span class="stat-label">Classes</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon rooms">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="statRooms">0</span>
+              <span class="stat-label">Rooms</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="panel">
+            <div class="panel-header">
+              <h2>How it works</h2>
+            </div>
+            <div class="panel-body">
+              <div class="how-steps">
+                <div class="how-step">
+                  <span class="how-num">1</span>
+                  <div>
+                    <strong>Enter your data</strong>
+                    <p>Teachers, subjects, classes and rooms. Each subject needs at least one teacher. Each class needs subjects with weekly period counts.</p>
+                  </div>
+                </div>
+                <div class="how-step">
+                  <span class="how-num">2</span>
+                  <div>
+                    <strong>Set rules</strong>
+                    <p>Working days, periods per day, teacher max load and available days. The engine respects every constraint you define.</p>
+                  </div>
+                </div>
+                <div class="how-step">
+                  <span class="how-num">3</span>
+                  <div>
+                    <strong>Generate</strong>
+                    <p>The scheduler builds every required lesson, then places them slot by slot. It avoids teacher clashes, class clashes and room clashes, balances teacher load, and runs multiple passes to find the strongest fit.</p>
+                  </div>
+                </div>
+                <div class="how-step">
+                  <span class="how-num">4</span>
+                  <div>
+                    <strong>Review and export</strong>
+                    <p>View by class or by teacher. Export CSV or print. Regenerate anytime after changing data.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-header">
+              <h2>Latest Timetable</h2>
+              <button class="btn-sm" id="viewTimetableBtn" style="display:none">View Full</button>
+            </div>
+            <div class="panel-body" id="latestPreview">
+              <div class="empty-state">
+                <p>No timetable generated yet</p>
+                <span>Load sample data or add your own, then generate</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TEACHERS -->
+      <section class="view" id="view-teachers">
+        <div class="panel">
+          <div class="panel-header">
+            <h2>Teachers</h2>
+            <button class="btn-primary" id="addTeacherBtn">Add Teacher</button>
+          </div>
+          <div class="panel-body">
+            <div class="table-wrap">
+              <table class="data-table" id="teachersTable">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Max Periods / Day</th>
+                    <th>Available Days</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <div class="empty-state" id="teachersEmpty">
+              <p>No teachers added</p>
+              <span>Click Add Teacher to begin</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SUBJECTS -->
+      <section class="view" id="view-subjects">
+        <div class="panel">
+          <div class="panel-header">
+            <h2>Subjects</h2>
+            <button class="btn-primary" id="addSubjectBtn">Add Subject</button>
+          </div>
+          <div class="panel-body">
+            <div class="table-wrap">
+              <table class="data-table" id="subjectsTable">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Assigned Teachers</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <div class="empty-state" id="subjectsEmpty">
+              <p>No subjects added</p>
+              <span>Click Add Subject to begin</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CLASSES -->
+      <section class="view" id="view-classes">
+        <div class="panel">
+          <div class="panel-header">
+            <h2>Classes / Batches</h2>
+            <button class="btn-primary" id="addClassBtn">Add Class</button>
+          </div>
+          <div class="panel-body">
+            <div class="table-wrap">
+              <table class="data-table" id="classesTable">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Subjects & Periods</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <div class="empty-state" id="classesEmpty">
+              <p>No classes added</p>
+              <span>Click Add Class to begin</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ROOMS -->
+      <section class="view" id="view-rooms">
+        <div class="panel">
+          <div class="panel-header">
+            <h2>Rooms</h2>
+            <button class="btn-primary" id="addRoomBtn">Add Room</button>
+          </div>
+          <div class="panel-body">
+            <div class="table-wrap">
+              <table class="data-table" id="roomsTable">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Capacity</th>
+                    <th>Type</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <div class="empty-state" id="roomsEmpty">
+              <p>No rooms added</p>
+              <span>Rooms are optional but recommended for complete allocation</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="view" id="view-settings">
+        <div class="panel">
+          <div class="panel-header">
+            <h2>Schedule Settings</h2>
+          </div>
+          <div class="panel-body settings-body">
+            <div class="form-group">
+              <label>Working Days</label>
+              <div class="days-selector" id="daysSelector">
+                <label class="day-chip"><input type="checkbox" value="Mon" checked> Mon</label>
+                <label class="day-chip"><input type="checkbox" value="Tue" checked> Tue</label>
+                <label class="day-chip"><input type="checkbox" value="Wed" checked> Wed</label>
+                <label class="day-chip"><input type="checkbox" value="Thu" checked> Thu</label>
+                <label class="day-chip"><input type="checkbox" value="Fri" checked> Fri</label>
+                <label class="day-chip"><input type="checkbox" value="Sat"> Sat</label>
+                <label class="day-chip"><input type="checkbox" value="Sun"> Sun</label>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="periodsPerDay">Periods per Day</label>
+                <input type="number" id="periodsPerDay" min="1" max="12" value="8">
+              </div>
+              <div class="form-group">
+                <label for="periodDuration">Period Duration (minutes)</label>
+                <input type="number" id="periodDuration" min="20" max="90" value="45">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="startTime">School Start Time</label>
+              <input type="time" id="startTime" value="08:00">
+            </div>
+            <div class="form-group">
+              <label>
+                <input type="checkbox" id="useRooms" checked>
+                Allocate rooms when available
+              </label>
+            </div>
+            <button class="btn-primary" id="saveSettings">Save Settings</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- TIMETABLE VIEW -->
+      <section class="view" id="view-timetable">
+        <div class="panel">
+          <div class="panel-header">
+            <h2>Generated Master Timetable</h2>
+            <div class="header-actions">
+              <div class="view-toggle" id="viewToggle">
+                <button class="toggle-btn active" data-mode="class">By Class</button>
+                <button class="toggle-btn" data-mode="teacher">By Teacher</button>
+              </div>
+              <select id="timetableFilter">
+                <option value="all">All</option>
+              </select>
+              <button class="btn-sm" id="exportCsv">Export CSV</button>
+              <button class="btn-sm" id="printTimetable">Print</button>
+            </div>
+          </div>
+          <div class="panel-body" id="timetableContainer"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- MODALS -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">Add Item</h3>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer">
+        <button class="btn-ghost" id="modalCancel">Cancel</button>
+        <button class="btn-primary" id="modalSave">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
