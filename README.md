@@ -3,19 +3,27 @@
 # Master Timetable Generator
 
 **Clean, conflict-free school & college timetable builder**  
-Runs fully in the browser — no backend, no install.
+Runs fully in the browser — no backend, no install, no account.
 
-[![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
-[![Vanilla JS](https://img.shields.io/badge/JavaScript-Vanilla-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![Live](https://img.shields.io/badge/Live-master--timetable--generator.vercel.app-black?style=for-the-badge&logo=vercel)](https://master-timetable-generator.vercel.app)
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
+[![Vanilla JS](https://img.shields.io/badge/JavaScript-Vanilla-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+
+**Live** → [master-timetable-generator.vercel.app](https://master-timetable-generator.vercel.app)
 
 </div>
 
 ---
 
+## Why this exists
+
+Building a weekly master timetable by hand is slow and error-prone. This tool generates a **conflict-free** schedule in seconds: teachers are never double-booked, subjects are spread across the week, and you can export or print immediately.
+
+---
+
 ## Quick start
 
-1. Open [`index.html`](./index.html) in any modern browser  
-   **or** serve the folder with any static server.
+1. Open the [live app](https://master-timetable-generator.vercel.app) **or** open [`index.html`](./index.html) in any modern browser.
 2. Click **Sample** (or add your own teachers, subjects and classes).
 3. Click **Generate Timetable**.
 4. Switch views (by class / by teacher), export **CSV**, or **Print**.
@@ -37,6 +45,7 @@ Data is saved automatically in `localStorage`.
 | **Keyboard** | Enter to save, Escape to close modals |
 | **Mobile** | Responsive layout |
 | **Persistence** | Autosave to localStorage |
+| **Zero backend** | Fully client-side — privacy by design |
 
 ---
 
@@ -56,10 +65,11 @@ Data is saved automatically in `localStorage`.
 ├── styles.css      # Clean, modern styles
 ├── app.js          # Scheduling logic + UI handlers
 ├── favicon.svg     # SR logo favicon
+├── LICENSE         # MIT
 └── README.md
 ```
 
-No build step. No dependencies.
+No build step. No dependencies. Works offline after first load.
 
 ---
 
@@ -68,11 +78,12 @@ No build step. No dependencies.
 - Schools and colleges building weekly master timetables
 - Quick what-if experiments (change periods, days, teachers)
 - Export for further editing in Excel / Google Sheets
+- Department coordinators who need a reliable first draft
 
 ---
 
 ## License
 
-MIT — free to use and modify.
+[MIT](./LICENSE) — free to use and modify.
 
-Built by [@sairambn](https://github.com/sairambn)
+Built by [@sairambn](https://github.com/sairambn) · **SR**
